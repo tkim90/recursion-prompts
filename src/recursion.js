@@ -13,15 +13,6 @@
   n < 0, return null
   recursive case: 
     return n * factiorial(n-1)
-
-  n=2 : 2 * factorial(1)
-  n=1 : 2 * (1 * factorial(0))
-  n=0 : 2 * (1 * 1)
-  2 * 1 = 2
-
-  n=0 >> 1
-  n=-1 >> -1
-
 */
 var factorial = function(n) {
   if (n<0) { return null; }
@@ -30,10 +21,40 @@ var factorial = function(n) {
   return n * factorial(n-1);
 };
 
+/*
+  input: array, output: integer
+  assumptions: input is 1 array, elements only contain numbers
+  base case: array[0]===undefined, return 0
+  recursive case:
+    get first elem in array
+    modify array by removing the first element in array
+    array[0] + sum(array)
+
+  [1,2,3]
+
+  currFirst = 1
+  arr = [2,3]
+  recursive = 1 + sum([2,3])
+
+  currFirst = 2
+  arr = [3]
+  recursive = 1 + (2 + sum[3])
+
+  currFirst = 3
+  arr =  []
+  recursive = 1 + (2 + (3 + sum([])))
+
+  currFirst = undefined
+  returns 0
+
+*/
+
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+  return array[0]===undefined ? 0 : array[0] + sum(array.slice(1));
 };
+sum([1,2,3])
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
