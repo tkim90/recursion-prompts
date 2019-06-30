@@ -59,22 +59,56 @@ sum([1,2,3])
 
 
 // 3. Sum all numbers in an array containing nested arrays.
+
+/*
+  Base: Return sum if no more elements left in input array
+  Recursive: Check if element is array - if it is, run recursion on first element of array
+  Declare sum variable at 0
+  For each element in array
+  Check if element is array or value
+  If element, run recursion
+  If value, add to sum
+  Return sum
+*/
+
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
   var sum = 0;
 
-  array.forEach(function(item) {
-    if (item instanceof Array) {
-      sum += arraySum(item);
-    } else {
-      sum += item;
+  array.forEach(function(el) {
+    if (el instanceof Array) { // element is another Array
+      sum += arraySum(el); // run recursion
+    } else { // element is a value
+      sum += el;
     }
-    return sum;
   })
+  return sum;
 };
+
+/*
+  divide number by 2
+  keep going until divide by 2 returns either a decimal or 0
+  if 0, even, else false
+
+  divid current n by 2
+  base case: NaN, decimal, 1 > false ; 0 > true
+  -n > isEven(-n)
+  recursive: isEven(n-2)
+
+*/
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  if (isNaN(n) || n!==parseInt(n) || n===1) { return false; }
+
+  if (n===0) {
+    return true;
+  } else if (n<0) {
+    return isEven(-n);
+  } else {
+    console.log('n: ', n, 'n/2: ', n/2)
+    return isEven(n/2);
+  }
 };
 
 // 5. Sum all integers below a given integer.
